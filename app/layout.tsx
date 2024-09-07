@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { dark } from "@clerk/themes";
+import Provider from "./provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,8 +39,7 @@ export default function RootLayout({
     >
       <html lang="en" suppressHydrationWarning>
         <body className={cn("min-h-screen antialiased")}>
-          {/* <Provider>{children}</Provider> */}
-          {children}
+          <Provider>{children}</Provider>
         </body>
       </html>
     </ClerkProvider>
