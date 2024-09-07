@@ -8,9 +8,10 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import Image from "next/image";
-// import { updateDocument } from "@/lib/actions/room.actions";
+import { updateDocument } from "@/lib/actions/room.actions";
 import Loader from "./loader";
 import Header from "./header";
+import ActiveCollaborators from "./active-collaborators";
 
 // import ShareModal from "./ShareModal";
 
@@ -33,17 +34,17 @@ const CollaborativeRoom = ({
     if (e.key === "Enter") {
       setLoading(true);
 
-      //   try {
-      //     if (documentTitle !== roomMetadata.title) {
-      //       const updatedDocument = await updateDocument(roomId, documentTitle);
+      try {
+        if (documentTitle !== roomMetadata.title) {
+          const updatedDocument = await updateDocument(roomId, documentTitle);
 
-      //       if (updatedDocument) {
-      //         setEditing(false);
-      //       }
-      //     }
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
+          if (updatedDocument) {
+            setEditing(false);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
 
       setLoading(false);
     }
@@ -117,7 +118,7 @@ const CollaborativeRoom = ({
               {loading && <p className="text-sm text-gray-400">saving...</p>}
             </div>
             <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
-              {/* <ActiveCollaborators /> */}
+              <ActiveCollaborators />
 
               {/* <ShareModal
                 roomId={roomId}
